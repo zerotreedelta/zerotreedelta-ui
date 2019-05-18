@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Dropzone from "../dropzone/Dropzone";
 import "./Upload.css";
 import Progress from "../progress/Progress";
+import { saveAs } from 'file-saver';
 
 class Upload extends Component {
   constructor(props) {
@@ -80,12 +81,23 @@ class Upload extends Component {
         reject(req.response);
       });
 
+      req.onreadystatechange = function() {
+  		if(req.readyState === 4) { // done
+  			if(req.status === 200) { // complete	
+  				var FileSaver = require('file-saver');
+  				var blob = new Blob([req.response], {type: "text/csv;charset=utf-8"});
+  				FileSaver.saveAs(blob, "combined.csv");
+  			}
+  		}
+  		};
+      
       const formData = new FormData();
       formData.append("file", file, file.name);
       
       console.log('Your input value is: ' + this.state.savvyPath)
       var savvyKey = this.state.savvyPath.replace("https://savvyanalysis.com/flight/", "");
       req.open("POST", "https://garmin-conversion-service-5fjvdhip2a-uc.a.run.app/combine?startingFuel="+this.state.startingFuel+"&savvyFlight="+savvyKey);
+      req.setRequestHeader('Content-Disposition', 'attachment; filename="filename.csv" filename*="filename.csv"')
       req.send(formData);
     });
   }
