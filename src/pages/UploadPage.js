@@ -157,7 +157,7 @@ class Upload extends Component {
         	<form>
         	<p><label>
         		Savvy Flight Link:
-        		<input type="text" name="savvy"  width="100%" onChange={this.updateSavvyPath} />
+        		<input type="text" name="savvy"  width="500" onChange={this.updateSavvyPath} />
         	</label></p>
         	
         	<p><label>
