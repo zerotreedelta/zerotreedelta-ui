@@ -171,7 +171,7 @@ class Upload extends Component {
   			</label></p>
         	<p><label>
     		JPI Time Correction (seconds):
-			    <input type="number" min="-600" max="600" name="jpioffset" onChange={this.updateJpiOffset} />
+			    <input type="number" min="-600" max="600" name="jpiOffset" onChange={this.updateJpiOffset} />
 			</label></p>
         	</form>
         </div>
