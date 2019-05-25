@@ -100,12 +100,7 @@ class Upload extends Component {
       formData.append("file", file, file.name);
       
       console.log('Your input value is: ' + this.state.savvyPath)
-      if(this.state.startingFuel.equals("")){
-    	  this.state.startingFuel = 100;
-      }
-      if(this.state.jpiOffset.equals("")){
-    	  this.state.jpiOffset = 0;
-      }
+
       var savvyKey = this.state.savvyPath.replace("https://savvyanalysis.com/flight/", "");
       req.open("POST", "https://garmin-conversion-service-5fjvdhip2a-uc.a.run.app/combine?startingFuel="+this.state.startingFuel+"&savvyFlight="+savvyKey+"&jpiSecondsOffset="+this.state.jpiOffset);
       req.setRequestHeader('Content-Disposition', 'attachment; filename="filename.csv" filename*="filename.csv"')
