@@ -13,7 +13,8 @@ class Upload extends Component {
       uploadProgress: {},
       successfullUploaded: false,
       savvyPath: '',
-      startingFuel: ''
+      startingFuel: '',
+      jpiOffset: ''
     };
 
     this.onFilesAdded = this.onFilesAdded.bind(this);
@@ -22,6 +23,7 @@ class Upload extends Component {
     this.renderActions = this.renderActions.bind(this);
     this.updateSavvyPath = this.updateSavvyPath.bind(this);
     this.updateStartingFuel = this.updateStartingFuel.bind(this);
+    this.jpiOffset = this.updateJpiOffset.bind(this);
   }
 
   onFilesAdded(files) {
@@ -35,6 +37,9 @@ class Upload extends Component {
   }  
   updateStartingFuel(event){
 	  this.setState({startingFuel : event.target.value})
+  }  
+  updateJpiOffset(event){
+	  this.setState({jpiOffset : event.target.value})
   }  
   async uploadFiles() {
     this.setState({ uploadProgress: {}, uploading: true });
@@ -96,7 +101,7 @@ class Upload extends Component {
       
       console.log('Your input value is: ' + this.state.savvyPath)
       var savvyKey = this.state.savvyPath.replace("https://savvyanalysis.com/flight/", "");
-      req.open("POST", "https://garmin-conversion-service-5fjvdhip2a-uc.a.run.app/combine?startingFuel="+this.state.startingFuel+"&savvyFlight="+savvyKey);
+      req.open("POST", "https://garmin-conversion-service-5fjvdhip2a-uc.a.run.app/combine?startingFuel="+this.state.startingFuel+"&savvyFlight="+savvyKey+"&jpiOffset="+this.state.jpiOffset);
       req.setRequestHeader('Content-Disposition', 'attachment; filename="filename.csv" filename*="filename.csv"')
       req.send(formData);
     });
@@ -164,6 +169,10 @@ class Upload extends Component {
         		Starting Fuel:
   			    <input type="number" min="0" max="200" name="fuel" onChange={this.updateStartingFuel} />
   			</label></p>
+        	<p><label>
+    		JPI Time Correction (seconds):
+			    <input type="number" min="-600" max="600" name="jpioffset" onChange={this.updateJpiOffset} />
+			</label></p>
         	</form>
         </div>
         
