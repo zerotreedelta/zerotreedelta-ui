@@ -23,7 +23,7 @@ class Upload extends Component {
     this.renderActions = this.renderActions.bind(this);
     this.updateSavvyPath = this.updateSavvyPath.bind(this);
     this.updateStartingFuel = this.updateStartingFuel.bind(this);
-    this.jpiOffset = this.updateJpiOffset.bind(this);
+    this.updateJpiOffset = this.updateJpiOffset.bind(this);
   }
 
   onFilesAdded(files) {
@@ -167,11 +167,11 @@ class Upload extends Component {
         	
         	<p><label>
         		Starting Fuel:
-  			    <input type="number" min="0" max="200" name="fuel" onChange={this.updateStartingFuel} />
+  			    <input type="number" min="0" max="200" value="80" name="fuel" onChange={this.updateStartingFuel} />
   			</label></p>
         	<p><label>
     		JPI Time Correction (seconds):
-			    <input type="number" min="-600" max="600" name="jpiOffset" onChange={this.updateJpiOffset} />
+			    <input type="number" min="-600" max="600" value="0" name="jpiOffset" onChange={this.updateJpiOffset} />
 			</label></p>
         	</form>
         </div>
