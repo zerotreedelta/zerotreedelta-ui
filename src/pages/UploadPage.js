@@ -91,7 +91,9 @@ class Upload extends Component {
   			if(req.status === 200) { // complete	
   				var FileSaver = require('file-saver');
   				var blob = new Blob([req.response], {type: "text/csv;charset=utf-8"});
-  				FileSaver.saveAs(blob, "combined.csv");
+  				var ds = (new Date()).toISOString().slice(0,10).replace(/[^0-9]/g, "");
+  				var dt = (new Date()).toISOString().slice(11,17).replace(/[^0-9]/g, "");
+  				FileSaver.saveAs(blob, "txi-"+ds+"-"+dt+".csv");
   			}
   		}
   		};
