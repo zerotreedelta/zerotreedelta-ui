@@ -19,4 +19,8 @@ jobs:
       - name: build
         run: npm run build
         env: 
-          CI: false
+          CI: fals      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: build/
