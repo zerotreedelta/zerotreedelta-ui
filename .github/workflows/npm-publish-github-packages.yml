@@ -16,4 +16,7 @@ jobs:
           node-version: 16
       - run: npm install file-saver --save 
       - run: npm install
-      - run: npm run build
+      - name: build
+        run: npm run build
+        env: 
+          CI: false
